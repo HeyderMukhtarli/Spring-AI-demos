@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 public class MyController {
@@ -16,8 +18,9 @@ public class MyController {
     @GetMapping("/audio")
     public String audio(@RequestParam String filePath){
         try {
+            Path path = Paths.get("src", "main", "resources", "python", "demo.py");
             ProcessBuilder processBuilder = new ProcessBuilder(
-                    "py", "D:\\Desktop\\projects\\GraphqlDemos\\gpt-whisper\\src\\main\\resources\\python\\demo.py"
+                    "py", path.toFile().getAbsolutePath()
             );
 
             processBuilder.redirectErrorStream(true);
